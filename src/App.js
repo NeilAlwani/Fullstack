@@ -9,7 +9,6 @@ import History from './Components/History'
 
 const App = () => {
   
-
   const anecdotes = [
     'If it hurts, do it more often',
     'Adding manpower to a late software project makes it later!',
@@ -33,13 +32,19 @@ const App = () => {
      setVotes(copy)
   }
 
+  const maxIndex = votes.indexOf( Math.max.apply(null, votes))
+
+
   console.log(votes)
 
   return (
     <div>
-      <p> {anecdotes[selected]}</p>
+      <h5>Anecdote of the day</h5>
+      <p> {anecdotes[selected]} Has {votes[selected]} votes</p>
       <Button handleClick={voteAnecdote} text={"vote"} />
-      <Button handleClick={pickRanddom} text={"next anec"} />    
+      <Button handleClick={pickRanddom} text={"next anec"} /> 
+      <h5>Anecdote with the most votes</h5>
+      {anecdotes[maxIndex]}
     </div>
   )
 }
