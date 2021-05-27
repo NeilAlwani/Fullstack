@@ -1,68 +1,57 @@
 import Reacht, {useState} from 'react'
 import Button from './Button'
 import Statistics from './Components/Statistics'
+import History from './Components/History'
 
+/**
+ * 1.b Anecdotes distillery 
+ */
 
-const App = () => {
-  return (
-    <div>
-      <h1>HI</h1>
-    </div>
-  )
-}
+// const App = () => {
+//   return (
+//     <div></div>
+//   )
+// }
 
 
 /**
  * 1.b Unicafe Feedback Collector
  */
 
-// const History = ({good, nu, ba, all, avg}) =>{
-//     if (all ==0) {
-//       return (
-//       <div>
-//         <h1>No feedback given</h1>
-//       </div>
-//       )
-//     }
-//     return(
-//       <Statistics good={good} neutral={nu} bad={ba} all={all} avg={avg}/>
-//     )
-// }
-
-// const App = () =>{
-//   const [Good, setGood] = useState(0)
-//   const [Neutral, setNeutral] = useState(0)
-//   const [Bad, setBad] = useState(0)
+const App = () =>{
+  const [Good, setGood] = useState(0)
+  const [Neutral, setNeutral] = useState(0)
+  const [Bad, setBad] = useState(0)
   
-//   const handleGood = () => {
-//     setGood(Good + 1)
-//   }
+  const handleGood = () => {
+    setGood(Good + 1)
+  }
 
-//   const handleNeutral = () => {
-//     setNeutral(Neutral + 1)
-//   }
+  const handleNeutral = () => {
+    setNeutral(Neutral + 1)
+  }
 
-//   const handleBad = () => {
-//     setBad(Bad + 1)
-//   }
+  const handleBad = () => {
+    setBad(Bad + 1)
+  }
 
-//   const all = Good + Bad + Neutral
+  const all = Good + Bad + Neutral
   
-//   const avgFeedback =  (Good - Bad) / all
+  const avgFeedback =  (Good - Bad) / all
     
   
-//   return(
-//     <div>
-//       <h1>Give feedback</h1>
-//       <Button 
-//       handleClick={handleGood} text={'good'} />
-//       <Button handleClick= {handleNeutral} text={'neutral'} />
-//       <Button handleClick={handleBad} text={'bad'} />
-//       <h1>Stats </h1>
-//       <History good={Good} nu={Neutral} ba={Bad} all={all} avg={avgFeedback}/>
-//     </div>
-//   )
-// }
+  return(
+    <div>
+      <h1>Give feedback</h1>
+      <Button 
+      handleClick={handleGood} text={'good'} />
+      <Button handleClick= {handleNeutral} text={'neutral'} />
+      <Button handleClick={handleBad} text={'bad'} />
+      <h1>Stats </h1>
+      <History good={Good} nu={Neutral} ba={Bad} all={all} avg={avgFeedback}/>
+    </div>
+  )
+}
 
 
 /**

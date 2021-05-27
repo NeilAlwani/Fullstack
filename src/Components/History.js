@@ -1,4 +1,4 @@
-import Statistics from "./Components/Statistics"
+import Statistics from "./Statistics";
 
 const History = ({good, nu, ba, all, avg}) => {
     if (all ==0) {
