@@ -1,5 +1,5 @@
 import Reacht, {useState} from 'react'
-import Button from './Button'
+import Button from './Components/Button'
 import Statistics from './Components/Statistics'
 import History from './Components/History'
 
@@ -7,51 +7,71 @@ import History from './Components/History'
  * 1.b Anecdotes distillery 
  */
 
-// const App = () => {
-//   return (
-//     <div></div>
-//   )
-// }
+const App = () => {
+  
+
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  ]
+  
+   const [selected, setSelected] = useState(0)
+
+   const pickRanddom = () => {
+     setSelected(Math.floor(Math.random() * anecdotes.length))
+   }
+
+  return (
+    <div>
+      <p> {anecdotes[selected]}</p>
+      <Button handleClick={pickRanddom} text={"next anec"} />
+    </div>
+  )
+}
 
 
 /**
  * 1.b Unicafe Feedback Collector
  */
 
-const App = () =>{
-  const [Good, setGood] = useState(0)
-  const [Neutral, setNeutral] = useState(0)
-  const [Bad, setBad] = useState(0)
+// const App = () =>{
+//   const [Good, setGood] = useState(0)
+//   const [Neutral, setNeutral] = useState(0)
+//   const [Bad, setBad] = useState(0)
   
-  const handleGood = () => {
-    setGood(Good + 1)
-  }
+//   const handleGood = () => {
+//     setGood(Good + 1)
+//   }
 
-  const handleNeutral = () => {
-    setNeutral(Neutral + 1)
-  }
+//   const handleNeutral = () => {
+//     setNeutral(Neutral + 1)
+//   }
 
-  const handleBad = () => {
-    setBad(Bad + 1)
-  }
+//   const handleBad = () => {
+//     setBad(Bad + 1)
+//   }
 
-  const all = Good + Bad + Neutral
+//   const all = Good + Bad + Neutral
   
-  const avgFeedback =  (Good - Bad) / all
+//   const avgFeedback =  (Good - Bad) / all
     
   
-  return(
-    <div>
-      <h1>Give feedback</h1>
-      <Button 
-      handleClick={handleGood} text={'good'} />
-      <Button handleClick= {handleNeutral} text={'neutral'} />
-      <Button handleClick={handleBad} text={'bad'} />
-      <h1>Stats </h1>
-      <History good={Good} nu={Neutral} ba={Bad} all={all} avg={avgFeedback}/>
-    </div>
-  )
-}
+//   return(
+//     <div>
+//       <h1>Give feedback</h1>
+//       <Button 
+//       handleClick={handleGood} text={'good'} />
+//       <Button handleClick= {handleNeutral} text={'neutral'} />
+//       <Button handleClick={handleBad} text={'bad'} />
+//       <h1>Stats </h1>
+//       <History good={Good} nu={Neutral} ba={Bad} all={all} avg={avgFeedback}/>
+//     </div>
+//   )
+// }
 
 
 /**
@@ -88,6 +108,10 @@ const App = () =>{
 //   ) 
 // }
 
+/**
+ * This is part of 1.a
+ */
+
 // History component
 // const History = (props) => {
 //   if (props.allClick.length == 0) {
@@ -105,8 +129,6 @@ const App = () =>{
 //   )
 // }
 
-
- 
 // const App = () => {
 //   const [clicks, setClicks] = useState({left: 0, right:0})
 //   const [allClick, setAll] = useState([])
