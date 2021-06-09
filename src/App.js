@@ -1,14 +1,19 @@
-import Reacht, {useState} from 'react'
-import Button from './Components/Button'
-import Statistics from './Components/Statistics'
-import History from './Components/History'
+import Course from './Components/Course'
+import Note from './Components/Note';
 
-const App = () =>{
-  return (
-    <div>
-      HI
-    </div>
-  )
+
+
+const App = ({notes}) =>{
+
+
+ return(
+     <div>
+          <h1>Notes</h1>
+          <ul>{notes.map(note => 
+            <Note key={note.id} note={note}/>)}          
+          </ul>
+     </div>
+ )
 }
 
 export default App;
