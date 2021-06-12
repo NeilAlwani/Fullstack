@@ -11,9 +11,12 @@ const App = () => {
 
     const addPersoon = (event) => {
         event.preventDefault()
-        console.log(event.target)
+        const personObject = {
+            name : newName
+        }
 
-
+        setPersons(persons.concat(personObject))
+        setnewName('')
     }
 
     const handleNameChange = (event) => {
@@ -35,7 +38,11 @@ const App = () => {
                 </div>
             </form>
             <h2>Numbers</h2>
-            <div>{persons.name}</div>
+            <div>
+                <ul>
+                    {persons.map(person => <li key={person.name}>{person.name}</li>)}
+                </ul>
+            </div>
             <div>debug: {newName}</div>
         </div>
     )
