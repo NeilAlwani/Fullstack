@@ -22,7 +22,11 @@ const App = () => {
     const handleNameChange = (event) => {
         console.log(event.target.value)
         setnewName(event.target.value)
+        if (persons.includes(event.target.value)){
+            window.alert("f")
+        }
     }
+  
 
     return (
         <div>
