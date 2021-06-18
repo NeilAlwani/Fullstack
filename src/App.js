@@ -5,11 +5,16 @@ import Note from './Components/Note';
 const App = () => {
 
     const [persons, setPersons] = useState([
-        {name : "Arto Hellas", 
-        number : '00-00-0000000'}
+        //dummy data to test functionality
+        { name: "Arto Hellas", number: '00-00-0000000'},
+        { name: 'Nico', number:'90-89-40928340'},
+        { name: 'Varma', number: '56-34-2345670'},
+        { name: 'Dan Abramov', number: '12-43-234345' },
+        { name: 'Mary Poppendieck', number: '39-23-6423122' }
     ])
     const [newName, setnewName] = useState('')
     const [newNumber, setnewNumber] = useState('')
+    const [filterName, setfilterName] = useState('')
 
    
     const addPersoon = (event) => {
@@ -29,8 +34,6 @@ const App = () => {
         setnewNumber('')
     }
 
-    
-
     const handleNameChange = (event) => {
         setnewName(event.target.value)
     }
@@ -38,12 +41,23 @@ const App = () => {
     const handleNumberChange = (event) => {
         setnewNumber(event.target.value)
     }
-  
+
+    const handleFilterName = (event) => {
+        setfilterName(event.target.value)
+    }
+
+    console.log(persons.filter(person => person.name == filterName))
 
     return (
         <div>
             <h2>Phonebook</h2>
+            <div>
+                filter by name: <input  
+                                    value={filterName} 
+                                    onChange={handleFilterName}/>
+            </div>
 
+            <h3>Add more: </h3>
             <form onSubmit={addPersoon}>
                 <div>
                     name: <input 
@@ -62,13 +76,8 @@ const App = () => {
 
             <h2>Numbers</h2>
             <div>
-                <ul>
-                    {persons.map(person => <li key={person.name}>{person.name} {person.number}</li>)}
-                </ul>
+                {persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)}    
             </div>
-
-            <div>debug: {newName}</div>
-
         </div>
     )
 }
