@@ -3,12 +3,9 @@ import Part from './Part'
 
 const Content = (props) => {   
 
-
-  
-
     const {parts} = props.course.parts
    
-     return(
+    return(
     <div>
        <ul>
             {props.course.parts ? props.course.parts.map((part)=> 

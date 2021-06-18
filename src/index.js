@@ -24,7 +24,7 @@ const notes = [
 
 
 ReactDOM.render(
-    <App notes={notes}/>,
+    <App/>,
   document.getElementById('root')
 );
 

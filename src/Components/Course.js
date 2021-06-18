@@ -12,8 +12,7 @@ const Course = (props) => {
     return(
         <div>
             <Header course={course} />
-            <Content course={course} />
-            
+            <Content course={course} />            
         </div> 
     )
 }
