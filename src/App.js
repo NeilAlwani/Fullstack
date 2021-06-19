@@ -7,14 +7,15 @@ const App = () => {
     const [persons, setPersons] = useState([
         //dummy data to test functionality
         { name: "Arto Hellas", number: '00-00-0000000'},
-        { name: 'Nico', number:'90-89-40928340'},
-        { name: 'Varma', number: '56-34-2345670'},
+        { name: 'Nico Bosco', number:'90-89-40928340'},
+        { name: 'Anjani Varma', number: '56-34-2345670'},
         { name: 'Dan Abramov', number: '12-43-234345' },
         { name: 'Mary Poppendieck', number: '39-23-6423122' }
     ])
     const [newName, setnewName] = useState('')
     const [newNumber, setnewNumber] = useState('')
     const [filterName, setfilterName] = useState('')
+    const [filter, setfilter] = useState(false)
 
    
     const addPersoon = (event) => {
@@ -44,9 +45,8 @@ const App = () => {
 
     const handleFilterName = (event) => {
         setfilterName(event.target.value)
+        setfilter(true)
     }
-
-    console.log(persons.filter(person => person.name == filterName))
 
     return (
         <div>
@@ -76,7 +76,10 @@ const App = () => {
 
             <h2>Numbers</h2>
             <div>
-                {persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)}    
+                {filter 
+                ? persons.filter(person => person.name.toLowerCase().indexOf(filterName.toLowerCase()) >=0).map(person => <p key={person.name}>{person.name} {person.number}</p> )
+                : persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)
+                }    
             </div>
         </div>
     )
