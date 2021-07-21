@@ -1,24 +1,37 @@
 import React, {useState} from 'react'
-import Course from './Components/Course'
-import Note from './Components/Note';
+import Person from "./Components/Person";
 
 const App = () => {
 
-    const [persons, setPersons] = useState([
+    const personList = [
         //dummy data to test functionality
         { name: "Arto Hellas", number: '00-00-0000000'},
         { name: 'Nico Bosco', number:'90-89-40928340'},
         { name: 'Anjani Varma', number: '56-34-2345670'},
         { name: 'Dan Abramov', number: '12-43-234345' },
         { name: 'Mary Poppendieck', number: '39-23-6423122' }
-    ])
+    ]
+
+    // States
+    const [persons, setPersons] = useState(personList)
     const [newName, setnewName] = useState('')
     const [newNumber, setnewNumber] = useState('')
     const [filterName, setfilterName] = useState('')
     const [filter, setfilter] = useState(false)
 
-   
-    const addPersoon = (event) => {
+
+
+
+    //Event handlers
+    const handleNameChange = (event) => {
+        setnewName(event.target.value)
+    }
+
+    const handleNumberChange = (event) => {
+        setnewNumber(event.target.value)
+    }
+
+    const addPerson = (event) => {
         event.preventDefault()
 
         if (persons.map(person => person.name).includes(newName)){
@@ -29,18 +42,10 @@ const App = () => {
                 name : newName,
                 number: newNumber
             }
-            setPersons(persons.concat(personObject))  
+            setPersons(persons.concat(personObject))
         }
         setnewName('')
         setnewNumber('')
-    }
-
-    const handleNameChange = (event) => {
-        setnewName(event.target.value)
-    }
-
-    const handleNumberChange = (event) => {
-        setnewNumber(event.target.value)
     }
 
     const handleFilterName = (event) => {
@@ -48,38 +53,83 @@ const App = () => {
         setfilter(true)
     }
 
+    //Components
+    const Comp1 = (props) => {
+        return (
+            <div>
+                <form onSubmit={props.addPerson}>
+                    <div>
+                        name: <input
+                        value={newName}
+                        onChange={props.handleNameChange}/>
+                    </div>
+                    <div>
+                        number: <input
+                        value={newNumber}
+                        onChange={props.handleNumberChange}/>
+                    </div>
+                    <div>
+                        <button type={"submit"}>Add</button>
+                    </div>
+                </form>
+            </div>
+        )
+
+    }
+
+    const Comp2 = (props) => {
+        const persons = props.persons
+        return(
+            <div>
+                <ul>
+                    {persons.map(person => <Person key={person.name} person={person}/>)}
+                </ul>
+            </div>
+        )
+    }
+
+    const Comp3 = (props) => {
+
+        const handleChange = (e) => {
+            props.handleFilterName(e.target.value)
+        }
+        const filterName = props.filterName
+
+        return(
+            <div>
+                Filter: <input
+                    value={filterName}
+                    onChange={handleChange}/>
+
+            </div>
+        )
+    }
+
+    //functions
+    filter
+        ? persons.filter(person => person.name.toLowerCase().indexOf(filterName.toLowerCase()) >=0).map(person => <p key={person.name}>{person.name} {person.number}</p> )
+        : persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)
+
+
     return (
         <div>
             <h2>Phonebook</h2>
-            <div>
-                filter by name: <input  
-                                    value={filterName} 
-                                    onChange={handleFilterName}/>
-            </div>
+            <h3>Filter for:</h3>
+            <Comp3
+                filterName={filterName}
+                filter={filter}
+                handleFilterName={handleFilterName}/>
 
-            <h3>Add more: </h3>
-            <form onSubmit={addPersoon}>
-                <div>
-                    name: <input 
-                            vlaue={newName}  
-                            onChange={handleNameChange}/>
-                </div>
-                <div>
-                    number: <input 
-                            value={newNumber} 
-                            onChange={handleNumberChange}/>
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                </div>
-            </form>
+            <h3>Add</h3>
+            <Comp1
+                addPerson={addPerson}
+                handleNameChange={handleNameChange}
+                handleNumberChange={handleNumberChange}/>
 
-            <h2>Numbers</h2>
+            <h3>Numbers</h3>
+            <Comp2 persons={persons}/>
             <div>
-                {filter 
-                ? persons.filter(person => person.name.toLowerCase().indexOf(filterName.toLowerCase()) >=0).map(person => <p key={person.name}>{person.name} {person.number}</p> )
-                : persons.map(person => <p key={person.name}>{person.name} {person.number}</p>)
-                }    
+
             </div>
         </div>
     )
